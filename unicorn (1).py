@@ -45,9 +45,13 @@ valuation_series = pd.to_numeric(filtered_df["Valuation"], errors='coerce')
 col1, col2, col3 = st.columns(3)
 col1.metric("Total Unicorns", len(filtered_df))
 col2.metric("Top Country", filtered_df["Country"].value_counts().idxmax() if not filtered_df.empty else "N/A")
+# Ensure Valuation is numeric
+filtered_df["Valuation"] = pd.to_numeric(filtered_df["Valuation"], errors="coerce")
+
 avg_valuation = round(valuation_series.mean(), 2) if not valuation_series.dropna().empty else "N/A"
 col3.metric("Avg Valuation ($B)", round(filtered_df["Valuation"].mean(), 2) if not filtered_df.empty else "N/A")
-
+# Ensure Valuation is numeric
+filtered_df["Valuation"] = pd.to_numeric(filtered_df["Valuation"], errors="coerce")
 
 # ----------------------------
 # Raw Data Preview
