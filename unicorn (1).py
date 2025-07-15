@@ -12,6 +12,7 @@ st.set_page_config(page_title="Unicorn Dashboard", page_icon="🦄", layout="wid
 # Load Data
 # ----------------------------
 df = pd.read_csv("Unicorn_Companies.csv")
+
 df.rename(columns={"Valuation ($B)": "Valuation", "Date Joined": "Date_Joined"}, inplace=True)
 df["Year_Joined"] = pd.to_datetime(df["Date_Joined"], errors='coerce').dt.year
 
@@ -128,7 +129,8 @@ from sklearn.pipeline import Pipeline
 # ----------------------------
 @st.cache_data
 def load_data():
-    df = pd.read_csv(r"C:\Users\himan\Downloads\Unicorn_Companies.csv")
+    df = pd.read_csv("Unicorn_Companies.csv")
+
     df["Valuation"] = df["Valuation ($B)"].replace('[\$,]', '', regex=True).astype(float)
     df["Investors Count"] = pd.to_numeric(df["Investors Count"], errors='coerce')
     df["Founded Year"] = pd.to_numeric(df["Founded Year"], errors='coerce')
